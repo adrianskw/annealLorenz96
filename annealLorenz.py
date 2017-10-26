@@ -24,7 +24,7 @@ def L96(t,x,k):
     return np.roll(x,1,1)*(np.roll(x,-1,1)-np.roll(x,2,1))-x+k
 
 # Importing data from ASCII file
-data  = np.loadtxt("L96.dat")
+data  = np.loadtxt("./data/inputs/L96.dat")
 times = data[:,0]
 
 # Our Constants

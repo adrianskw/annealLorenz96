@@ -1,3 +1,18 @@
+"""
+Some extra stuff for quality of life improvement
+"""
+import sys, os
+# Parsing and catches for the input
+if (len(sys.argv)!=2) or isinstance(sys.argv[1],int) or (sys.argv[1]<4):
+    print("Please enter a proper integer for the dimension D.")
+    sys.exit(0)
+# Setting the parsed integer to D
+D = int(sys.argv[1])
+print "Running makeLorenz for D = ",str(D)
+"""
+End QOL segment
+"""
+
 # This code is from the Wikipedia Lorenz96 page with slight modifications
 # It generates a Lorenz96 model according to the given parameters
 
@@ -20,7 +35,7 @@ import numpy as np
 # M  = number of timesteps, NOTE: output will have M+1 timesteps
 # T  = end time
 # t  = array of output times
-D  = 1000
+# D  = 1000
 F  = 8.17
 dt = 0.1
 M  = 200

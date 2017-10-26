@@ -86,8 +86,8 @@ myannealer.anneal(X0, P0, alpha, beta, Rm, Rf0, Lidx, Pidx, dt_model=dt,
                   opt_args=BFGS_options, adolcID=0)
 # enablePrint()
 
-myannealer.save_paths("paths.npy")  # Path estimates
-myannealer.save_params("params.npy")  # Parameter estimates
-myannealer.save_action_errors("action_errors.npy")  # Action and individual error terms
+#myannealer.save_paths("paths.npy")  # Path estimates
+#myannealer.save_params("params.npy")  # Parameter estimates
+#myannealer.save_action_errors("action_errors.npy")  # Action and individual error terms
 
 print("Annealing done. Run time is "+str(time.time()-tstart)+"seconds.")

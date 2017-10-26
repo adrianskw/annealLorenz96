@@ -50,5 +50,4 @@ for i in range(0,M):
             y[i,j] = x[i,j-1]
 
 # writing Lorenz96 data to a data file
-output = open("L96.dat","w")
-np.savetxt("L96.dat",y,fmt="%6f") # can add delimiters = ', '
+np.savetxt("./data/inputs/L96.dat",y,fmt="%6f") # can add delimiters = ', '

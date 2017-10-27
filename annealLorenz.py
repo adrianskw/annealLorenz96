@@ -113,7 +113,7 @@ M_model     = int(M/2)+1 # we are only assimilating the first half of data
 Rm          = 5.0
 Rf0         = 1e-6
 alpha       = 1.5
-steps       = 100
+steps       = 200
 
 # Lidx = Index of measured variables (automatic)
 Lidx  = np.arange(0,D-1,1.0/L_frac).astype(int)
@@ -154,8 +154,8 @@ enablePrint()
 
 # Setting up unique ID for output
 ID = "_D="+str(D)+"_dt="+str(dt)+"_Lfrac="+str(L_frac)+".npy"
-myannealer.save_paths("paths"+ID)  # Path estimates
-myannealer.save_params("params"+ID)  # Parameter estimates
-myannealer.save_action_errors("action_errors"+ID)  # Action and individual error terms
+myannealer.save_paths("./data/outputs/paths"+ID)  # Path estimates
+myannealer.save_params("./data/outputs/params"+ID)  # Parameter estimates
+myannealer.save_action_errors("./data/outputs/action_errors"+ID)  # Action and individual error terms
 
 print("Annealing done. Run time is "+str(time.time()-tstart)+"seconds.")

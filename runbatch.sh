@@ -8,6 +8,8 @@
 # L_frac = fraction of D that is "measured"
 # run the code as:
 #   bash runbatch.sh
+# All output is appended to the end of a log file
+# Runtime is recorded in the log file
 python annealLorenz.py 5 100 0.2 0.4 >> logs/out.log
 echo "DONE 1"
 python annealLorenz.py 5 40 0.5 0.4 >> logs/out.log

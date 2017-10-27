@@ -1,13 +1,10 @@
 # annealLorenz96
-Testing the limits of VarAnneal for large dimensions, specifically the Lorenz96 model.
+Testing the limits of VarAnneal applied to Lorenz96 in the case of large dimensions and measurement sparsity.
 
 Dependencies:
 Python with full Scipy stack (the usual when it comes to scientific computing)
 
-To use:
+## To use:
 
-	python makeLorenz.py <value>
-Numerically generates a Lorenz system with D=\<value\> dimension, for a fixed number of timesteps M=200, dt_observed = 0.1, and dt_generation=0.001. The resulting files are stored as data/inputs/L96_D\<value\>.dat. Currently, D = 5,10,20,50,100,200,500,1000 have already been generated and are stored in this repository.
-
-	python annealLorenz.py <value>
-Anneals the data in data/inputs/L96_D\<value\>.dat 
+	python annealLorenz.py D dt L_frac
+Numerically generates a Lorenz system with dimensions D and timestep dt, for a fixed number of timesteps M=200. The data is immediately fed into VarAnneal with a fraction of measured variables L_frac, which is automatically determined.

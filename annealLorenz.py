@@ -9,19 +9,25 @@ import numpy as np
 tstart = time.time()
 
 # Parsing the input arguments
-if (len(sys.argv)!=4):
-    print("Please enter proper arguments for D, dt, L_frac respectively.")
+if (len(sys.argv)!=5) or isinstance(sys.argv[1],int) or isinstance(sys.argv[2],int):
+    print("Please enter proper arguments:")
+    print("D integer")
+    print("M integer")
+    print("dt float")
+    print("L_frac float<1")
     sys.exit(0)
 
 # Setting the parsed values to D, dt, L_frac
 # D         = number of variables, aka dimension of measurement
+# M         = number of timesteps to take
 # dt        = timestep of measurements
 # L_frac    = fraction of variables that are measured
-D,dt,L_frac  = np.asarray(sys.argv[1:])
+D,M,dt,L_frac  = np.asarray(sys.argv[1:])
 D = D.astype(int)
+M = M.astype(int)
 dt = dt.astype(float)
 L_frac = L_frac.astype(float)
-print "Running annealLorenz for D = "+str(D)+ \
+print "Running annealLorenz for D = "+str(D)+ ", M = "+str(M)+ \
         ", dt = "+str(dt)+", L_frac = "+str(L_frac)
 
 # Disable all print statements
@@ -56,7 +62,6 @@ from scipy.integrate import odeint
 # frac      = amount to skip, ie. 1/resolution
 # x0        = initial state of the system (equilibrium)
 F       = 8.17
-M       = 200 # change me in the future
 T       = M*dt
 t       = np.linspace(0,T,M+1)
 dt_gen  = 0.001
@@ -112,25 +117,23 @@ def L96(t,x,k):
 M_model     = int(M/2)+1 # we are only assimilating the first half of data
 Rm          = 5.0
 Rf0         = 1e-6
-alpha       = 1.5
+alpha       = 1.2
 steps       = 200
 
 # Lidx = Index of measured variables (automatic)
 Lidx  = np.arange(0,D-1,1.0/L_frac).astype(int)
-print("Feeding the following dimensions into VarAnneal: "+str(Lidx))
+# print("Feeding the following dimensions into VarAnneal: "+str(Lidx))
 
 # Pidx = Index of parameters
 # beta = Index of Rf (eg. Rf[beta]=Rf0*alpha^beta)
 # X0 = Initial paths
 # P0 = Initial parameters
-# subdata = Subset of time series data to be fed into varanneal
-# subtimes = Subset of times to be fed into varanneal
 Pidx  = [0]
 beta  = np.linspace(0,steps-1,steps)
 #X0 = (10.0 * (2*np.random.rand(M_model,D)-1))
-X0 = np.ones((M_model,D))
+X0 = np.ones((M_model,D))+0.01
 #P0 = np.array([4.0*np.random.rand()+6.0])
-P0 = np.array([6])
+P0 = np.array([6.0])
 
 # Defining a subset of times and data to be fed into the model
 t_model = t[0:M_model]
@@ -153,7 +156,7 @@ myannealer.anneal(X0, P0, alpha, beta, Rm, Rf0, Lidx, Pidx, dt_model=dt,
 enablePrint()
 
 # Setting up unique ID for output
-ID = "_D="+str(D)+"_dt="+str(dt)+"_Lfrac="+str(L_frac)+".npy"
+ID = "_D="+str(D)+"_M="+str(M)+"_dt="+str(dt)+"_Lfrac="+str(L_frac)+".npy"
 myannealer.save_paths("./data/outputs/paths"+ID)  # Path estimates
 myannealer.save_params("./data/outputs/params"+ID)  # Parameter estimates
 myannealer.save_action_errors("./data/outputs/action_errors"+ID)  # Action and individual error terms

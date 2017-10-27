@@ -5,6 +5,5 @@ Dependencies:
 Python with full Scipy stack (the usual when it comes to scientific computing)
 
 ## To use:
-
 	python annealLorenz.py D dt L_frac
-Numerically generates a Lorenz system with dimensions D and timestep dt, for a fixed number of timesteps M=200. The data is immediately fed into VarAnneal with a fraction of measured variables L_frac, which is automatically determined.
+Numerically generates a Lorenz system with dimensions D and timestep dt, for a fixed number of timesteps M=200. The data is immediately fed into VarAnneal with a fraction of measured variables L_frac, which is automatically determined. D, dt, and L_frac have to be input in the command line. This allows for easy scripting.
